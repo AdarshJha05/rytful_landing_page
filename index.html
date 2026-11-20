@@ -301,6 +301,88 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
 @media (max-width:960px){.glass-a{left:0}.glass-b{right:0}}
 @media (max-width:600px){.glass{display:none}.hero::before{width:420px;height:420px}}
 
+/* ===== Responsive pass ===== */
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav .nav-cta{display:none}
+.nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:#fff}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);place-items:center;cursor:pointer}
+.menu-btn path{transition:transform .25s ease,opacity .2s ease;transform-origin:12px 12px}
+.nav.open .menu-btn .l1{transform:translateY(5px) rotate(45deg)}
+.nav.open .menu-btn .l2{opacity:0}
+.nav.open .menu-btn .l3{transform:translateY(-5px) rotate(-45deg)}
+.pill{font-size:.75rem}
+.foot-grid ul a,.foot-bottom a{display:inline-block;padding:4px 0}
+.sticky-cta{transition:transform .3s ease,opacity .3s ease}
+.sticky-cta.hide,body.menu-open .sticky-cta{transform:translateY(140%);opacity:0;pointer-events:none}
+
+/* tablet + phone: collapsible menu */
+@media (max-width: 960px){
+  .nav .wrap{position:relative}
+  .menu-btn{display:grid}
+  .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 24px 20px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(14,17,22,.35);visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s;max-height:calc(100dvh - 68px);overflow-y:auto}
+  .nav.open .nav-links{visibility:visible;opacity:1;transform:none;transition:opacity .2s ease,transform .2s ease}
+  .nav-links a:not(.nav-cta){padding:14px 0;font-size:1.05rem;border-bottom:1px solid var(--line)}
+  .nav-links a::after{display:none}
+  .nav-links a.active{color:var(--accent-ink)}
+  .nav .nav-cta{display:flex;margin-top:16px;padding:14px 22px;font-size:1rem}
+
+  /* features: two columns on tablets */
+  .feat.third{grid-column:span 3}
+  /* pricing: keep cards readable instead of stretching */
+  .price-grid{max-width:560px;margin:0 auto}
+  .plan.pop{margin-top:6px}
+  .hero-visual{max-width:620px;margin:0 auto;width:100%}
+}
+
+@media (max-width: 600px){
+  .nav-links{padding:4px 16px 16px}
+  .feat.third{grid-column:span 6}
+  .feat,.plan{padding:24px}
+  form{padding:24px 20px}
+  .hero-ctas .btn{flex:1 1 100%}
+  .stack-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stack-row .chip{justify-content:flex-start;padding:12px 14px}
+  .stack-row .eq{grid-column:1/-1;justify-content:center}
+  .agent,.demo{padding-left:0;padding-right:0}
+  .flow{padding:22px}
+  .cap{padding:16px}
+  .sec-head{margin-bottom:32px}
+  .why b{font-size:2.2rem}
+  .sticky-cta{bottom:calc(12px + env(safe-area-inset-bottom))}
+  .foot-bottom{flex-direction:column}
+
+  /* comparison table becomes stacked rows so nothing is cut off */
+  .compare-box table,.compare-box tbody{display:block}
+  .compare-box thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .compare-box tr{display:grid;grid-template-columns:1fr auto;column-gap:12px;row-gap:2px;padding:16px;border-bottom:1px solid var(--line)}
+  .compare-box td{display:block;padding:0;border:0;font-size:.95rem}
+  .compare-box td:first-child{font-weight:600;grid-column:1}
+  .compare-box td:nth-child(2):not(.num){grid-column:1;grid-row:2;color:var(--muted);font-size:.85rem}
+  .compare-box td.num{grid-column:2;grid-row:1 / span 2;align-self:center;text-align:right;font-weight:600}
+  .compare-box tr.total,.compare-box tr.us{border-bottom:0}
+  .compare-box tr.total{background:#F8FAFC}
+  .compare-box tr.us{background:var(--ink);color:#fff}
+  .compare-box tr.total td,.compare-box tr.us td{background:transparent}
+  .compare-box tr.us td{font-size:1rem}
+  .compare-box tr.us td.num{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .compare-box tr.us td .save{margin-left:0}
+}
+
+@media (max-width: 380px){
+  .hero h1{font-size:2.35rem}
+  h2{font-size:1.85rem}
+  .badge{font-size:.8rem}
+  .plan .amt{font-size:2.4rem}
+  .stack-row{grid-template-columns:1fr}
+  .glass{display:none}
+}
+
+/* phones held sideways: the floating CTA would cover too much */
+@media (max-height: 500px) and (orientation: landscape){
+  .sticky-cta{display:none}
+  body{padding-bottom:0}
+}
+
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -313,14 +395,20 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
       <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       Rytful Media
     </a>
-    <nav class="nav-links" aria-label="Main">
+    <nav class="nav-links" id="main-nav" aria-label="Main">
       <a href="#platform">Platform</a>
       <a href="#ai-agent">AI Sales Agent</a>
       <a href="#compare">Compare</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
+      <a href="#demo" class="btn btn-primary nav-cta">Book a free demo</a>
     </nav>
-    <a href="#demo" class="btn btn-dark">Book a demo</a>
+    <div class="nav-actions">
+      <a href="#demo" class="btn btn-dark nav-demo">Book a demo</a>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -692,7 +780,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
 </section>
 </main>
 
-<footer>
+<footer id="main-footer">
   <div class="wrap">
     <div class="foot-grid">
       <div>
@@ -737,7 +825,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   const nav = document.querySelector('.nav');
   const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  const links = [...document.querySelectorAll('.nav-links a')];
+  const links = [...document.querySelectorAll('.nav-links a:not(.nav-cta)')];
   const byId = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
   if ('IntersectionObserver' in window) {
     const spy = new IntersectionObserver(entries => {
@@ -765,6 +853,31 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
         });
       }));
     }
+  }
+
+  // Mobile/tablet menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const setMenu = open => {
+    nav.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
+  document.addEventListener('click', e => { if (nav.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
+  matchMedia('(min-width: 961px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  // Hide the floating CTA while the demo form or footer is on screen
+  const sticky = document.querySelector('.sticky-cta');
+  if (sticky && 'IntersectionObserver' in window) {
+    const seen = new Set();
+    const ctaIo = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+      sticky.classList.toggle('hide', seen.size > 0);
+    });
+    ['demo', 'main-footer'].forEach(id => { const el = document.getElementById(id); if (el) ctaIo.observe(el); });
   }
 
   // Form: required markers, inline errors near each field, loading then success state
