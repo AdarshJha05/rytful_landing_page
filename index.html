@@ -232,15 +232,82 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
   .sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
   body{padding-bottom:84px}
 }
-@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Enhancements (ui-ux-pro-max pass) ===== */
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;transition:top .2s}
+.skip:focus{top:12px}
+h1,h2{text-wrap:balance}
+.lead,.feat p{text-wrap:pretty}
+.plan .amt,td.num,.why b{font-variant-numeric:tabular-nums}
+html{scroll-padding-top:84px}
+a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn{transition:transform .18s cubic-bezier(.2,.7,.2,1),background .18s ease,box-shadow .18s ease}
+.btn-primary{box-shadow:0 10px 20px -14px rgba(14,17,22,.55)}
+.btn-primary:hover{box-shadow:0 14px 24px -14px rgba(14,17,22,.6)}
+.btn:active{transform:scale(.98)}
+
+/* nav active state */
+.nav-links a{position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--ink);font-weight:600}
+.nav.scrolled{box-shadow:0 8px 24px -18px rgba(14,17,22,.35)}
+
+/* hero depth: glow + glass */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-20%;right:-10%;width:720px;height:720px;background:radial-gradient(closest-side,rgba(255,154,112,.35),rgba(255,154,112,0));pointer-events:none}
+.hero::after{content:"";position:absolute;left:-200px;bottom:-260px;width:620px;height:620px;background:radial-gradient(closest-side,rgba(120,150,255,.22),rgba(120,150,255,0));pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero-visual{position:relative;padding:28px 0}
+.hero-visual .mock{position:relative;z-index:1}
+.glass{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.8);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:0 18px 40px -18px rgba(14,17,22,.35);font-size:.85rem;font-weight:600;white-space:nowrap}
+.glass small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+.glass .gi{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none}
+.glass-a{top:0;left:-28px}
+.glass-b{bottom:0;right:-20px}
+@media (prefers-reduced-motion: no-preference){
+  .glass-a{animation:float 6s ease-in-out infinite}
+  .glass-b{animation:float 7s ease-in-out -2s infinite}
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* card hover depth */
+.feat,.plan,.ind,.chip,.cap{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .25s ease}
+@media (hover:hover){
+  .feat:hover,.plan:hover,.ind:hover{transform:translateY(-4px);box-shadow:0 22px 40px -24px rgba(14,17,22,.3);border-color:#CDD3DD}
+  .chip:not(.eq):hover{transform:translateY(-2px);border-color:#CDD3DD}
+  .cap:hover{border-color:#3A414D}
+}
+.plan.pop{box-shadow:0 30px 60px -32px rgba(14,17,22,.45)}
+
+/* scroll reveal (JS adds .reveal only when motion is allowed) */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* form feedback */
+.req{color:var(--accent-ink);margin-left:2px}
+.err{display:block;color:#B42318;font-size:.8rem;font-weight:500;margin-top:-6px}
+.err:empty{display:none}
+input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;background:#FFF6F5}
+.btn[aria-busy="true"]{pointer-events:none;opacity:.85}
+.btn[aria-busy="true"]::before{content:"";width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-ok .ok-ic{width:56px;height:56px;border-radius:50%;background:var(--mint);display:grid;place-items:center;margin:0 auto 16px}
+.form-ok:focus{outline:none}
+
+@media (max-width:960px){.glass-a{left:0}.glass-b{right:0}}
+@media (max-width:600px){.glass{display:none}.hero::before{width:420px;height:420px}}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap">
     <a href="#" class="logo" aria-label="Rytful Media home">
-      <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       Rytful Media
     </a>
     <nav class="nav-links" aria-label="Main">
@@ -254,7 +321,7 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
   </div>
 </header>
 
-<main>
+<main id="main">
 <!-- HERO -->
 <section class="hero">
   <div class="wrap hero-grid">
@@ -264,16 +331,25 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
       <p class="lead">Rytful Media builds your high-converting website and connects it to a CRM, cloud phone system, WhatsApp Business API and AI agents, so every lead is captured, followed up and closed in one place.</p>
       <div class="hero-ctas">
         <a href="#demo" class="btn btn-primary">Book a free demo
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="#platform" class="btn btn-ghost">See what's included</a>
       </div>
       <ul class="hero-note">
-        <li><span class="tick"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>Website live in 14 days</li>
-        <li><span class="tick"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>Numbers in 100+ countries</li>
-        <li><span class="tick"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>No long-term contract</li>
+        <li><span class="tick"><svg aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>Website live in 14 days</li>
+        <li><span class="tick"><svg aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>Numbers in 100+ countries</li>
+        <li><span class="tick"><svg aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M2 5.2 4 7l4-4.5" stroke="#1C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>No long-term contract</li>
       </ul>
     </div>
 
+    <div class="hero-visual">
+    <div class="glass glass-a" aria-hidden="true">
+      <span class="gi" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="2"><path d="M3 8.5 6.5 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>New lead captured<small>from your website form</small></span>
+    </div>
+    <div class="glass glass-b" aria-hidden="true">
+      <span class="gi" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
+      <span>AI agent called back<small>in 42 seconds · qualified</small></span>
+    </div>
     <div class="mock" aria-hidden="true">
       <div class="mock-bar"><i></i><i></i><i></i><b>app.rytfulmedia — Pipeline</b></div>
       <div class="mock-body">
@@ -301,6 +377,7 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
         </div>
       </div>
     </div>
+    </div>
   </div>
 </section>
 
@@ -309,15 +386,15 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
   <div class="wrap">
     <p class="stack-label">Five tools you'd normally buy separately, built to work as one</p>
     <div class="stack-row">
-      <div class="chip"><span class="ic" style="background:var(--sky)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.8"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M1.5 6h13"/></svg></span>Website</div>
+      <div class="chip"><span class="ic" style="background:var(--sky)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.8"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M1.5 6h13"/></svg></span>Website</div>
       <span class="plus">+</span>
-      <div class="chip"><span class="ic" style="background:var(--mint)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 4h12M2 8h8M2 12h5"/></svg></span>CRM</div>
+      <div class="chip"><span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 4h12M2 8h8M2 12h5"/></svg></span>CRM</div>
       <span class="plus">+</span>
-      <div class="chip"><span class="ic" style="background:var(--rose)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>Cloud Calling</div>
+      <div class="chip"><span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>Cloud Calling</div>
       <span class="plus">+</span>
-      <div class="chip"><span class="ic" style="background:var(--mint)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 14l1-3.2A6 6 0 1 1 5.3 13Z"/></svg></span>WhatsApp API</div>
+      <div class="chip"><span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 14l1-3.2A6 6 0 1 1 5.3 13Z"/></svg></span>WhatsApp API</div>
       <span class="plus">+</span>
-      <div class="chip"><span class="ic" style="background:var(--sun)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A6A00" stroke-width="1.8"><rect x="3" y="5" width="10" height="8" rx="2"/><path d="M8 2v3M6 9h.01M10 9h.01"/></svg></span>AI Agents</div>
+      <div class="chip"><span class="ic" style="background:var(--sun)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A6A00" stroke-width="1.8"><rect x="3" y="5" width="10" height="8" rx="2"/><path d="M8 2v3M6 9h.01M10 9h.01"/></svg></span>AI Agents</div>
       <span class="plus">=</span>
       <div class="chip eq">Rytful Media</div>
     </div>
@@ -374,7 +451,7 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
 
     <div class="feat-grid">
       <article class="feat wide hl">
-        <span class="ic" style="background:#fff"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#0E1116" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M1.5 6h13M4 4.3h.01M6 4.3h.01"/></svg></span>
+        <span class="ic" style="background:#fff"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#0E1116" stroke-width="1.6"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M1.5 6h13M4 4.3h.01M6 4.3h.01"/></svg></span>
         <h3>Conversion-first websites</h3>
         <p>Designed and built by our team, not a template you fight with. Every page is wired to your CRM from day one.</p>
         <ul>
@@ -385,7 +462,7 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
         </ul>
       </article>
       <article class="feat wide">
-        <span class="ic" style="background:var(--mint)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.6"><path d="M2 3h3v10H2zM6.5 3h3v7h-3zM11 3h3v4h-3z"/></svg></span>
+        <span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.6"><path d="M2 3h3v10H2zM6.5 3h3v7h-3zM11 3h3v4h-3z"/></svg></span>
         <h3>Sales CRM &amp; pipeline</h3>
         <p>See every lead, deal and conversation on one board. Know who to call next and what was said last time.</p>
         <ul>
@@ -396,32 +473,32 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
         </ul>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--rose)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
+        <span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
         <h3>Cloud calling</h3>
         <p>Local business numbers in the US, UK, UAE, Canada, Australia and 100+ countries. Call from laptop or phone, every call recorded and logged.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--mint)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.6"><path d="M2 14l1-3.2A6 6 0 1 1 5.3 13Z"/></svg></span>
+        <span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.6"><path d="M2 14l1-3.2A6 6 0 1 1 5.3 13Z"/></svg></span>
         <h3>WhatsApp Business API</h3>
         <p>Official API with a verified business profile. Shared team inbox, broadcasts, catalogs and chatbots that capture leads around the clock.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--sky)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.6"><path d="M8 1.5v3M8 11.5v3M1.5 8h3M11.5 8h3M3.4 3.4l2.1 2.1M10.5 10.5l2.1 2.1M3.4 12.6l2.1-2.1M10.5 5.5l2.1-2.1"/></svg></span>
+        <span class="ic" style="background:var(--sky)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.6"><path d="M8 1.5v3M8 11.5v3M1.5 8h3M11.5 8h3M3.4 3.4l2.1 2.1M10.5 10.5l2.1 2.1M3.4 12.6l2.1-2.1M10.5 5.5l2.1-2.1"/></svg></span>
         <h3>Automations</h3>
         <p>When a lead does X, do Y. Auto-assign, auto-message and auto-remind without writing a line of code.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--sun)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#8A6A00" stroke-width="1.6"><path d="M2 14V8M6 14V4M10 14v-4M14 14V2"/></svg></span>
+        <span class="ic" style="background:var(--sun)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#8A6A00" stroke-width="1.6"><path d="M2 14V8M6 14V4M10 14v-4M14 14V2"/></svg></span>
         <h3>Reports that matter</h3>
         <p>Cost per lead, response time, conversion by source and rep. Know exactly which channel pays for itself.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--rose)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8ZM8 5v3l2 1.5"/></svg></span>
+        <span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8ZM8 5v3l2 1.5"/></svg></span>
         <h3>Ads &amp; lead generation</h3>
         <p>Optional managed Google and Meta campaigns, pointed at landing pages we build and measured inside your CRM.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--sky)"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.6"><path d="M6 3H3v10h10v-3M9 2h5v5M14 2 7 9"/></svg></span>
+        <span class="ic" style="background:var(--sky)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#2848A8" stroke-width="1.6"><path d="M6 3H3v10h10v-3M9 2h5v5M14 2 7 9"/></svg></span>
         <h3>Integrations</h3>
         <p>Connect Gmail, Outlook, Google Calendar, Stripe, Zapier, Shopify and the tools you already use.</p>
       </article>
@@ -551,8 +628,8 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
         </ul>
       </div>
 
-      <form id="demo-form" novalidate>
-        <h3>Book your free demo</h3>
+      <form id="demo-form" novalidate aria-labelledby="demo-form-title">
+        <h3 id="demo-form-title">Book your free demo</h3>
         <div class="f2">
           <label>Full name<input name="name" required autocomplete="name" placeholder="Jane Smith"></label>
           <label>Work email<input name="email" type="email" required autocomplete="email" placeholder="jane@company.com"></label>
@@ -582,8 +659,8 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
         </div>
         <button type="submit" class="btn btn-dark">Book my demo</button>
         <p class="fine" style="margin-top:0">We'll reply within one business day. No spam, ever.</p>
-        <div class="form-ok" role="status">
-          <b>You're booked in.</b>
+        <div class="form-ok" role="status" tabindex="-1">
+          <span class="ok-ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="2"><path d="M3 8.5 6.5 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>You're booked in.</b>
           <p style="color:var(--muted)">Thanks! Our team will email you shortly to pick a time that works in your time zone.</p>
         </div>
       </form>
@@ -617,7 +694,7 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
     <div class="foot-grid">
       <div>
         <a href="#" class="logo">
-          <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           Rytful Media
         </a>
         <p>Websites, CRM, cloud calling, WhatsApp and AI sales agents for growing businesses worldwide.</p>
@@ -645,21 +722,85 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
 <a href="#demo" class="btn btn-primary sticky-cta">Book a free demo</a>
 
 <script>
+(() => {
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Nav: shadow on scroll + active section highlight
+  const nav = document.querySelector('.nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const links = [...document.querySelectorAll('.nav-links a')];
+  const byId = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        links.forEach(a => { a.classList.remove('active'); a.removeAttribute('aria-current'); });
+        const a = byId[e.target.id];
+        if (a) { a.classList.add('active'); a.setAttribute('aria-current', 'true'); }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(byId).forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+    // Scroll reveal with a short stagger; skipped entirely for reduced motion
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && document.visibilityState === 'visible') {
+      const groups = ['.sec-head', '.caps', '.flow', '.feat-grid', '.compare-box', '.ind-grid', '.why', '.price-grid', '.faq-grid > div:last-child'];
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      groups.forEach(sel => document.querySelectorAll(sel).forEach(group => {
+        const kids = group.matches('.sec-head,.compare-box,.flow') ? [group] : [...group.children];
+        kids.forEach((el, i) => {
+          el.classList.add('reveal');
+          el.style.transitionDelay = (Math.min(i, 7) * 60) + 'ms';
+          io.observe(el);
+        });
+      }));
+    }
+  }
+
+  // Form: required markers, inline errors near each field, loading then success state
   const form = document.getElementById('demo-form');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const required = form.querySelectorAll('[required]');
-    let first = null;
-    required.forEach(el => {
-      const ok = el.checkValidity();
-      el.style.borderColor = ok ? '' : '#D33';
-      if (!ok && !first) first = el;
-    });
-    if (first) { first.focus(); return; }
-    // TODO: send to your CRM / form endpoint here (e.g. fetch('/api/leads', {method:'POST', body: new FormData(form)}))
-    form.classList.add('sent');
+  const messages = {
+    name: 'Please enter your name.',
+    email: 'Please enter a valid work email, like jane@company.com.',
+    company: 'Please enter your company name.',
+    phone: 'Please enter a phone number with country code, like +1 555 010 2030.',
+    country: 'Please choose your country.'
+  };
+  const fields = [...form.querySelectorAll('[required]')];
+  fields.forEach(el => {
+    const label = el.closest('label');
+    const txt = [...label.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+    if (txt) {
+      const r = document.createElement('span');
+      r.className = 'req'; r.setAttribute('aria-hidden', 'true'); r.textContent = '*';
+      txt.after(r);
+    }
+    const err = document.createElement('span');
+    err.className = 'err'; err.id = 'err-' + el.name;
+    label.after(err);
+    el.setAttribute('aria-describedby', err.id);
+    el.addEventListener('blur', () => { if (el.value) validate(el); });
+    el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') validate(el); });
   });
+  function validate(el) {
+    let ok = el.checkValidity();
+    if (ok && el.name === 'phone') ok = el.value.replace(/\D/g, '').length >= 7;
+    el.setAttribute('aria-invalid', String(!ok));
+    document.getElementById('err-' + el.name).textContent = ok ? '' : messages[el.name];
+    return ok;
+  }
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = fields.filter(el => !validate(el));
+    if (bad.length) { bad[0].focus(); return; }
+    const btn = form.querySelector('button[type=submit]');
+    btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Booking…';
+    // TODO: send to your CRM / form endpoint, e.g. fetch('/api/leads', { method: 'POST', body: new FormData(form) })
+    setTimeout(() => { form.classList.add('sent'); form.querySelector('.form-ok').focus(); }, 700);
+  });
+})();
 </script>
 </body>
 </html>
