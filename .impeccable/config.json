@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-11-20T05:07:51.437Z",
         "reason": "Claude: compare-box wraps a table whose th/td cells have 18-24px padding; children are not flush text"
+      },
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-20T05:31:44.387Z",
+        "reason": "User confirmed: keep the section eyebrow labels above headings"
       }
     ]
   }
