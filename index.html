@@ -214,8 +214,6 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
 .social a:hover{color:var(--accent-ink);border-color:#CDD3DD;transform:translateY(-2px)}
 .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
 
-/* mobile sticky cta */
-.sticky-cta{display:none}
 
 @media (max-width: 960px){
   .hero-grid,.agent-grid,.demo-grid,.faq-grid{grid-template-columns:1fr;gap:40px}
@@ -238,8 +236,6 @@ footer{padding:72px 0 40px;border-top:1px solid var(--line);margin-top:24px}
   th,td{padding:14px 12px;font-size:.88rem}
   .plus{display:none}
   .nav .btn{display:none}
-  .sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
-  body{padding-bottom:84px}
 }
 
 /* ===== Enhancements (ui-ux-pro-max pass) ===== */
@@ -319,8 +315,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
 .pill{font-size:.75rem}
 .foot-grid ul a,.foot-bottom a{display:inline-block;padding:4px 0}
 .foot-grid ul.social a{display:grid;place-items:center;padding:0}
-.sticky-cta{transition:transform .3s ease,opacity .3s ease}
-.sticky-cta.hide,body.menu-open .sticky-cta{transform:translateY(140%);opacity:0;pointer-events:none}
 
 /* tablet + phone: collapsible menu */
 @media (max-width: 960px){
@@ -358,7 +352,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   .stat{padding:28px 24px}
   .stat + .stat{border-left:0;border-top:1px solid #262B33}
   .why{border-radius:22px}
-  .sticky-cta{bottom:calc(12px + env(safe-area-inset-bottom))}
   .foot-bottom{flex-direction:column}
 
   /* comparison table becomes stacked rows so nothing is cut off */
@@ -385,12 +378,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   .plan .amt{font-size:2.4rem}
   .stack-row{grid-template-columns:1fr}
   .glass{display:none}
-}
-
-/* phones held sideways: the floating CTA would cover too much */
-@media (max-height: 500px) and (orientation: landscape){
-  .sticky-cta{display:none}
-  body{padding-bottom:0}
 }
 
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
@@ -837,7 +824,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   </div>
 </footer>
 
-<a href="#demo" class="btn btn-primary sticky-cta">Book a free demo</a>
 
 <script>
 (() => {
@@ -881,7 +867,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   const menuBtn = document.querySelector('.menu-btn');
   const setMenu = open => {
     nav.classList.toggle('open', open);
-    document.body.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
@@ -890,17 +875,6 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
   addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
   document.addEventListener('click', e => { if (nav.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
   matchMedia('(min-width: 961px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
-
-  // Hide the floating CTA while the demo form or footer is on screen
-  const sticky = document.querySelector('.sticky-cta');
-  if (sticky && 'IntersectionObserver' in window) {
-    const seen = new Set();
-    const ctaIo = new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
-      sticky.classList.toggle('hide', seen.size > 0);
-    });
-    ['demo', 'main-footer'].forEach(id => { const el = document.getElementById(id); if (el) ctaIo.observe(el); });
-  }
 
   // Form: required markers, inline errors near each field, loading then success state
   const form = document.getElementById('demo-form');
