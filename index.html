@@ -14,7 +14,7 @@
 <style>
 :root{
   --ink:#0E1116; --ink-2:#2A2F38; --muted:#5D6470; --line:#E1E5EC;
-  --paper:#F3F5F8; --card:#FFFFFF; --accent:#D23E0A; --accent-ink:#B83A0B;
+  --paper:#F3F5F8; --card:#FFFFFF; --accent:#0F766E; --accent-ink:#115E59; --accent-light:#5EEAD4; --tint:#CCFBF1;
   --mint:#D9F2E3; --sky:#DDE8FF; --sun:#FFF0C9; --rose:#FFE1D6;
   --r:18px; --max:1180px;
   --display:"Bricolage Grotesque", system-ui, sans-serif;
@@ -35,7 +35,7 @@ section{padding:96px 0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:600;font-size:1rem;padding:15px 26px;border-radius:999px;border:1.5px solid var(--ink);transition:transform .15s ease, background .15s ease;cursor:pointer;font-family:var(--body)}
 .btn:hover{transform:translateY(-2px)}
 .btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn-primary:hover{background:#B8360A}
+.btn-primary:hover{background:#115E59}
 .btn-dark{background:var(--ink);color:#fff}
 .btn-ghost{background:transparent}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -71,7 +71,7 @@ section{padding:96px 0}
 .lead-card{border:1px solid var(--line);border-radius:14px;padding:14px;font-size:.85rem}
 .lead-card .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .pill{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px}
-.p-hot{background:var(--rose);color:var(--accent-ink)}
+.p-hot{background:var(--rose);color:#9A3412}
 .p-new{background:var(--sky);color:#2848A8}
 .p-won{background:var(--mint);color:#1C6B3E}
 .lead-card .who{font-weight:600}
@@ -80,7 +80,7 @@ section{padding:96px 0}
 .ai-log .h{display:flex;align-items:center;gap:8px;font-weight:600;margin-bottom:10px;color:#fff}
 .dot-live{width:8px;height:8px;border-radius:50%;background:#3DDC84;box-shadow:0 0 0 4px rgba(61,220,132,.2)}
 .ai-log p{opacity:.85;margin-bottom:6px}
-.ai-log p b{color:#FFB89C;font-weight:600}
+.ai-log p b{color:var(--accent-light);font-weight:600}
 
 /* stack strip */
 .stack{padding:40px 0 24px}
@@ -93,12 +93,12 @@ section{padding:96px 0}
 
 /* ai agent */
 .agent{background:var(--ink);color:#F1EEE7;border-radius:32px;margin:0 16px;padding:96px 0}
-.agent .eyebrow{color:#FFB89C}
+.agent .eyebrow{color:var(--accent-light)}
 .agent .lead{color:#A9AFB9}
 .agent-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:48px}
 .caps{display:grid;gap:14px}
 .cap{display:flex;gap:16px;align-items:flex-start;padding:18px;border:1px solid #262B33;border-radius:16px;background:#151920}
-.cap .n{font-family:var(--display);font-weight:800;color:#FF9A70;font-size:1.05rem;min-width:26px}
+.cap .n{font-family:var(--display);font-weight:800;color:var(--accent-light);font-size:1.05rem;min-width:26px}
 .cap h3{font-size:1.05rem;margin-bottom:4px;color:#fff}
 .cap p{color:#A9AFB9;font-size:.93rem}
 .flow{position:sticky;top:100px;border:1px solid #262B33;border-radius:22px;padding:28px;background:#151920}
@@ -106,7 +106,7 @@ section{padding:96px 0}
 .step{display:flex;gap:14px;position:relative;padding-bottom:22px}
 .step:last-child{padding-bottom:0}
 .step:not(:last-child)::before{content:"";position:absolute;left:15px;top:34px;bottom:4px;width:2px;background:#2A303A}
-.step .b{width:32px;height:32px;border-radius:50%;background:#232833;border:1px solid #343B47;display:grid;place-items:center;flex:none;font-size:.8rem;font-weight:700;color:#FFB89C}
+.step .b{width:32px;height:32px;border-radius:50%;background:#232833;border:1px solid #343B47;display:grid;place-items:center;flex:none;font-size:.8rem;font-weight:700;color:var(--accent-light)}
 .step strong{display:block;color:#fff;font-size:.97rem}
 .step span{color:#A9AFB9;font-size:.88rem}
 .promise{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
@@ -258,7 +258,7 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:mani
 
 /* hero depth: glow + glass */
 .hero{position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;top:-20%;right:-10%;width:720px;height:720px;background:radial-gradient(closest-side,rgba(255,154,112,.35),rgba(255,154,112,0));pointer-events:none}
+.hero::before{content:"";position:absolute;top:-20%;right:-10%;width:720px;height:720px;background:radial-gradient(closest-side,rgba(45,212,191,.28),rgba(45,212,191,0));pointer-events:none}
 .hero::after{content:"";position:absolute;left:-200px;bottom:-260px;width:620px;height:620px;background:radial-gradient(closest-side,rgba(120,150,255,.22),rgba(120,150,255,0));pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
 .hero-visual{position:relative;padding:28px 0}
@@ -310,7 +310,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
 <header class="nav">
   <div class="wrap">
     <a href="#" class="logo" aria-label="Rytful Media home">
-      <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       Rytful Media
     </a>
     <nav class="nav-links" aria-label="Main">
@@ -350,7 +350,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
       <span>New lead captured<small>from your website form</small></span>
     </div>
     <div class="glass glass-b" aria-hidden="true">
-      <span class="gi" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
+      <span class="gi" style="background:var(--tint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#115E59" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
       <span>AI agent called back<small>in 42 seconds · qualified</small></span>
     </div>
     <div class="mock" aria-hidden="true">
@@ -393,7 +393,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
       <span class="plus">+</span>
       <div class="chip"><span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 4h12M2 8h8M2 12h5"/></svg></span>CRM</div>
       <span class="plus">+</span>
-      <div class="chip"><span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>Cloud Calling</div>
+      <div class="chip"><span class="ic" style="background:var(--tint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#115E59" stroke-width="1.8"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>Cloud Calling</div>
       <span class="plus">+</span>
       <div class="chip"><span class="ic" style="background:var(--mint)"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C6B3E" stroke-width="1.8"><path d="M2 14l1-3.2A6 6 0 1 1 5.3 13Z"/></svg></span>WhatsApp API</div>
       <span class="plus">+</span>
@@ -476,7 +476,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
         </ul>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
+        <span class="ic" style="background:var(--tint)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#115E59" stroke-width="1.6"><path d="M3 2.5h2.5l1.2 3-1.6 1a7 7 0 0 0 4.4 4.4l1-1.6 3 1.2V13a1.5 1.5 0 0 1-1.6 1.5A11.5 11.5 0 0 1 1.5 4.1 1.5 1.5 0 0 1 3 2.5Z"/></svg></span>
         <h3>Cloud calling</h3>
         <p>Local business numbers in the US, UK, UAE, Canada, Australia and 100+ countries. Call from laptop or phone, every call recorded and logged.</p>
       </article>
@@ -496,7 +496,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
         <p>Cost per lead, response time, conversion by source and rep. Know exactly which channel pays for itself.</p>
       </article>
       <article class="feat third">
-        <span class="ic" style="background:var(--rose)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#B83A0B" stroke-width="1.6"><path d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8ZM8 5v3l2 1.5"/></svg></span>
+        <span class="ic" style="background:var(--tint)"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#115E59" stroke-width="1.6"><path d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8ZM8 5v3l2 1.5"/></svg></span>
         <h3>Ads &amp; lead generation</h3>
         <p>Optional managed Google and Meta campaigns, pointed at landing pages we build and measured inside your CRM.</p>
       </article>
@@ -697,7 +697,7 @@ input[aria-invalid="true"],select[aria-invalid="true"]{border-color:#B42318;back
     <div class="foot-grid">
       <div>
         <a href="#" class="logo">
-          <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#FF5A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="logo-mark"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V3h5.2a3 3 0 0 1 .6 5.94L12 13" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           Rytful Media
         </a>
         <p>Websites, CRM, cloud calling, WhatsApp and AI sales agents for growing businesses worldwide.</p>
